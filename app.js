@@ -1,7 +1,7 @@
 /**
  * ASTRA Brand Identity & Creative Agency Web Engine
  * Implements interactive canvas constellation, brand lab inspector,
- * modern dialog modals, dynamic brief calculator, and audio feedback.
+ * modern dialog modals, interactive brief configurator, and audio feedback.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,6 +24,15 @@ function initConstellationCanvas() {
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frameId;
+  reducedMotion.addEventListener('change', restart);
+  document.addEventListener('visibilitychange', restart);
+  function restart() {
+    cancelAnimationFrame(frameId);
+    if (!document.hidden) render();
+  }
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
 
@@ -67,8 +76,10 @@ function initConstellationCanvas() {
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
 
-      p.x += p.vx;
-      p.y += p.vy;
+      if (!reducedMotion.matches) {
+        p.x += p.vx;
+        p.y += p.vy;
+      }
 
       if (p.x < 0) p.x = width;
       if (p.x > width) p.x = 0;
@@ -122,7 +133,7 @@ function initConstellationCanvas() {
     }
 
     ctx.globalAlpha = 1.0;
-    requestAnimationFrame(render);
+    if (!reducedMotion.matches && !document.hidden) frameId = requestAnimationFrame(render);
   }
 
   render();
@@ -145,17 +156,21 @@ function initHeader() {
   });
 
   if (mobileBtn && mobileNav) {
-    mobileBtn.addEventListener('click', () => {
-      mobileNav.classList.toggle('hidden');
+    function setMenu(open) {
+      mobileNav.classList.toggle('hidden', !open);
+      mobileBtn.setAttribute('aria-expanded', String(open));
+      mobileBtn.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    }
+    mobileBtn.addEventListener('click', () => setMenu(mobileBtn.getAttribute('aria-expanded') !== 'true'));
+    mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    header.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && mobileBtn.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        mobileBtn.focus();
+      }
     });
-
-    // Close when clicking mobile nav links
-    const mobileLinks = mobileNav.querySelectorAll('a');
-    mobileLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.add('hidden');
-      });
-    });
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    desktop.addEventListener('change', () => setMenu(false));
   }
 }
 
@@ -179,8 +194,9 @@ function initLogoLab() {
 
   variantBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      variantBtns.forEach((b) => b.classList.remove('active'));
+      variantBtns.forEach((b) => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       const variantKey = btn.getAttribute('data-variant');
       if (variantMap[variantKey] && activeLogoImg) {
@@ -203,6 +219,7 @@ function initLogoLab() {
     let isGridOn = false;
     toggleGridBtn.addEventListener('click', () => {
       isGridOn = !isGridOn;
+      toggleGridBtn.setAttribute('aria-pressed', String(isGridOn));
       if (isGridOn) {
         blueprintLayer.style.opacity = '1';
         toggleGridBtn.classList.add('bg-volt', 'text-black');
@@ -308,59 +325,39 @@ function initManualLightbox() {
 }
 
 /* ==========================================================================
-   7. BRIEF & ESTIMATE SIMULATOR ("DISEÑA TU ÓRBITA")
+   7. BRIEF CONFIGURATOR ("DISEÑA TU ÓRBITA")
    ========================================================================== */
 function initBriefSimulator() {
   const scopeBtns = document.querySelectorAll('#brief-scope-group .brief-option');
   const stageBtns = document.querySelectorAll('#brief-stage-group .brief-stage');
   const addonBoxes = document.querySelectorAll('#brief-addons-group .addon-checkbox');
-  const totalDisplay = document.getElementById('brief-total-estimate');
   const sendBriefBtn = document.getElementById('send-brief-btn');
 
-  let currentBase = 1800;
-  let currentMultiplier = 1.0;
   let currentScopeLabel = 'Brand Identity 360';
   let currentStageLabel = 'Startup / Lanzamiento';
 
-  function recalculate() {
-    let addonsTotal = 0;
-    addonBoxes.forEach((cb) => {
-      if (cb.checked) {
-        addonsTotal += parseFloat(cb.getAttribute('data-add') || 0);
-      }
-    });
-
-    const total = Math.round((currentBase * currentMultiplier) + addonsTotal);
-    if (totalDisplay) {
-      totalDisplay.textContent = `$${total.toLocaleString('en-US')} USD`;
-    }
-  }
-
   scopeBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      scopeBtns.forEach((b) => b.classList.remove('active'));
+      scopeBtns.forEach((b) => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
-      currentBase = parseFloat(btn.getAttribute('data-base') || 1800);
+      btn.setAttribute('aria-pressed', 'true');
       currentScopeLabel = btn.querySelector('span')?.textContent || '';
-      recalculate();
       playBeep(380, 0.05);
     });
   });
 
   stageBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      stageBtns.forEach((b) => b.classList.remove('active'));
+      stageBtns.forEach((b) => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active');
-      currentMultiplier = parseFloat(btn.getAttribute('data-multiplier') || 1.0);
+      btn.setAttribute('aria-pressed', 'true');
       currentStageLabel = btn.querySelector('span')?.textContent || '';
-      recalculate();
       playBeep(420, 0.05);
     });
   });
 
   addonBoxes.forEach((cb) => {
     cb.addEventListener('change', () => {
-      recalculate();
       playBeep(cb.checked ? 650 : 320, 0.04);
     });
   });
@@ -383,7 +380,7 @@ function initBriefSimulator() {
         : '';
 
       if (messageTextarea) {
-        messageTextarea.value = `Hola ASTRA,\n\nHe configurado un brief inicial con los siguientes parámetros:\n- Objetivo: ${currentScopeLabel}\n- Etapa: ${currentStageLabel}${addonsText}\n- Presupuesto estimado referencial: ${totalDisplay.textContent}\n\nMe gustaría agendar una llamada exploratoria para profundizar en los detalles del proyecto.`;
+        messageTextarea.value = `Hola ASTRA,\n\nHe configurado un brief inicial con los siguientes parámetros:\n- Objetivo: ${currentScopeLabel}\n- Etapa: ${currentStageLabel}${addonsText}\n\nMe gustaría agendar una llamada exploratoria para profundizar en los detalles del proyecto.`;
       }
 
       if (serviceSelect) {
@@ -393,7 +390,7 @@ function initBriefSimulator() {
       }
 
       if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
+        contactSection.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
       }
 
       playBeep(780, 0.08);
@@ -449,6 +446,8 @@ function initAudioSynth() {
       }
 
       soundEnabled = !soundEnabled;
+      soundToggle.setAttribute('aria-pressed', String(soundEnabled));
+      soundToggle.setAttribute('aria-label', soundEnabled ? 'Desactivar sonidos de interfaz' : 'Activar sonidos de interfaz');
       if (soundStatus) {
         soundStatus.textContent = soundEnabled ? 'SFX: ON' : 'SFX: OFF';
       }

@@ -88,8 +88,8 @@ Ubicadas en `assets/logos/`:
    - Campo editable en tiempo real para previsualizar cualquier texto o titular en las tipografías corporativas.
 4. **Visor del Manual Oficial (Native Modal Lightbox)**:
    - Galería interactiva con las páginas del manual de marca renderizadas en alta resolución utilizando el elemento estándar `<dialog>`.
-5. **Configurador de Brief & Cotizador ("Diseña tu Órbita")**:
-   - Calculadora paso a paso que estima el presupuesto referencial según alcance, etapa de la marca y módulos adicionales.
+5. **Configurador de Brief ("Diseña tu Órbita")**:
+   - Configurador paso a paso que recoge el objetivo, la etapa de la marca y los módulos adicionales, sin mostrar precios estimados.
    - Botón de transferencia directa que precarga el brief en el formulario de contacto.
 6. **Formulario de Contacto Accesible**:
    - Campos validados nativamente con selectores CSS `:user-valid` y `:user-invalid`, y modal de confirmación.
@@ -116,13 +116,13 @@ ASTRA/
 │   │   ├── astra-logo-orange.svg      # Versión Makoy Fruit
 │   │   └── astra-symbol.svg           # Isotipo oficial (A orbital con estrella)
 │   └── manual/
+│       ├── Manual de Marca ASTRA.pdf  # Documento original del manual
 │       ├── page-01.png ... page-15.png  # Páginas completas en alta definición
 │       └── thumbs/
 │           ├── page-01.webp ... page-15.webp  # Miniaturas optimizadas
 ├── index.html                         # Estructura semántica HTML5
 ├── styles.css                         # Hoja de estilos autónoma y responsive
 ├── app.js                             # Motor interactivo de la aplicación
-├── Manual de Marca ASTRA.pdf          # Documento original del manual
 └── README.md                          # Documentación del proyecto
 ```
 
@@ -136,7 +136,7 @@ ASTRA/
   - Reglas de contención de scroll (`overscroll-behavior: contain`) y modales nativos (`dialog:modal`).
   - Pseudo-clases modernas `:user-valid` y `:user-invalid`.
   - Estilos de respaldo integrados (funciona con o sin conexión a internet).
-- **Tailwind CSS (CDN v3)**: Integrado con tokens temáticos personalizados.
+- **Tailwind CSS 3.4.17 precompilado**: utilidades locales en `assets/utilities.css`, sin compilación en el navegador ni CDN.
 - **JavaScript Moderno (ES6+)**:
   - Manipulación nativa del DOM sin dependencias externas.
   - Web Audio API (`AudioContext`) para el sintetizador de efectos sonoros.
@@ -168,3 +168,13 @@ Abre el directorio en Visual Studio Code o en tu IDE preferido y ejecuta **Open 
 
 - **Identidad de Marca**: ASTRA Creative Agency (Manual de Marca Oficial 2026).
 - **Desarrollo Web**: Diseñado y construido con precisión vectorial, estética futurista y estándares web modernos.
+
+## Recorrido comercial y accesibilidad
+
+La página presenta inicio, servicios, brief y contacto antes de la historia y del laboratorio de marca. El laboratorio sigue disponible desde la navegación como contenido complementario.
+
+El configurador no contiene precios ni cálculos monetarios. La navegación móvil admite Escape y expone su estado; los controles de selección y sonido comunican su estado a lectores de pantalla. Incluye enlace para saltar al contenido, foco visible y respeto de `prefers-reduced-motion`, también en el canvas. El canvas se pausa al ocultar la pestaña.
+
+Las fuentes de interfaz y los estilos se sirven desde `assets/fonts/` y `assets/utilities.css`. No hay solicitudes a Google Fonts ni al CDN de Tailwind al visitar la página. Las fuentes de interfaz son alternativas visuales; no sustituyen los archivos tipográficos oficiales del manual de marca.
+
+El formulario de contacto sigue siendo una demostración local: todavía no tiene un servicio de envío conectado.

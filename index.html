@@ -5,51 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTRA | Agencia Creativa & Brand Identity — Hagamos algo digno de recordar</title>
   <meta name="description" content="ASTRA es una agencia creativa que combina estrategia, innovación y diseño futurista para transformar ideas en marcas memorables.">
-  
+
   <!-- OpenGraph / Social Meta -->
   <meta property="og:title" content="ASTRA | Agencia Creativa & Brand Identity">
   <meta property="og:description" content="Hagamos algo digno de recordar. Combinamos creatividad, innovación y visión para llevar cada proyecto más allá de lo esperado.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/manual/thumbs/page-01.webp">
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/logos/astra-symbol.svg">
-  
-  <!-- Google Fonts: Space Grotesk, Syne, Orbitron, Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN (v3 with Custom ASTRA Configuration) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            volt: '#cfff02',
-            'impact-blue': '#1046c0',
-            'makoy-fruit': '#ef8e01',
-            dark: '#080b0e',
-            'dark-surface': '#0e141b',
-            'dark-card': '#131a22'
-          },
-          fontFamily: {
-            syne: ['Syne', 'sans-serif'],
-            orbitron: ['Orbitron', 'sans-serif'],
-            mono: ['Space Grotesk', 'monospace'],
-            sans: ['Plus Jakarta Sans', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-  
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+
+  <!-- Precompiled Tailwind 3.4.17 utilities: no runtime CDN -->
+  <link rel="stylesheet" href="assets/utilities.css">
+
   <!-- Core Standalone Stylesheet (Bulletproof Fallback & Custom Components) -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-dark text-slate-100 antialiased selection:bg-volt selection:text-black min-h-screen overflow-x-hidden">
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
   <!-- Background Interactive Constellation Canvas -->
   <canvas id="constellation-canvas" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>
@@ -67,22 +43,18 @@
       </a>
 
       <!-- Desktop Navigation (Hidden on < lg to avoid crowding) -->
-      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium tracking-wide">
-        <a href="#manifiesto" class="nav-link hover:text-volt transition-colors">Manifiesto</a>
-        <a href="#filosofia" class="nav-link hover:text-volt transition-colors">Filosofía</a>
-        <a href="#valores" class="nav-link hover:text-volt transition-colors">Valores</a>
-        <a href="#brand-system" class="nav-link hover:text-volt transition-colors flex items-center gap-1.5">
-          <span>Brand System</span>
-          <span class="inline-block w-1.5 h-1.5 rounded-full bg-volt animate-pulse"></span>
-        </a>
+      <nav aria-label="Navegación principal" class="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium tracking-wide">
         <a href="#servicios" class="nav-link hover:text-volt transition-colors">Servicios</a>
-        <a href="#brief-simulator" class="nav-link hover:text-volt transition-colors">Cotizador</a>
+        <a href="#brief-simulator" class="nav-link hover:text-volt transition-colors">Preparar brief</a>
+        <a href="#contacto" class="nav-link hover:text-volt transition-colors">Contacto</a>
+        <a href="#manifiesto" class="nav-link hover:text-volt transition-colors">Sobre ASTRA</a>
+        <a href="#brand-system" class="nav-link hover:text-volt transition-colors">Laboratorio de marca</a>
       </nav>
 
       <!-- Action Utilities -->
       <div class="flex items-center gap-3 flex-shrink-0">
         <!-- Sound FX Synth Toggle -->
-        <button id="sound-toggle" type="button" class="p-2 sm:p-2.5 rounded-full border border-white/10 bg-white/5 hover:border-volt/50 hover:bg-volt/10 text-white/70 hover:text-volt transition-all text-xs flex items-center gap-1.5 cursor-pointer" title="Activar/Desactivar micro-sonidos sci-fi" aria-label="Toggle Sonido Ambient">
+        <button id="sound-toggle" type="button" class="p-2 sm:p-2.5 rounded-full border border-white/10 bg-white/5 hover:border-volt/50 hover:bg-volt/10 text-white/70 hover:text-volt transition-all text-xs flex items-center gap-1.5 cursor-pointer" title="Activar/Desactivar micro-sonidos sci-fi" aria-label="Activar sonidos de interfaz" aria-pressed="false">
           <svg class="w-4 h-4 sound-on-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
           <span class="sound-status text-[11px] font-mono hidden sm:inline">SFX: OFF</span>
         </button>
@@ -93,7 +65,7 @@
         </a>
 
         <!-- Mobile Menu Button (Visible on < lg) -->
-        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-white/80 hover:text-volt focus:outline-none cursor-pointer" aria-label="Abrir Menú de Navegación">
+        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-white/80 hover:text-volt focus:outline-none cursor-pointer" aria-label="Abrir menú de navegación" aria-controls="mobile-nav" aria-expanded="false">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
@@ -102,26 +74,21 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-nav" class="hidden lg:hidden bg-dark-surface/98 backdrop-blur-2xl border-b border-white/10 px-6 py-6 transition-all shadow-2xl">
       <div class="flex flex-col gap-4 text-base font-medium">
-        <a href="#manifiesto" class="mobile-nav-link text-white/80 hover:text-volt py-1">Manifiesto</a>
-        <a href="#filosofia" class="mobile-nav-link text-white/80 hover:text-volt py-1">Filosofía</a>
-        <a href="#valores" class="mobile-nav-link text-white/80 hover:text-volt py-1">Valores</a>
-        <a href="#brand-system" class="mobile-nav-link text-white/80 hover:text-volt py-1">Brand System</a>
         <a href="#servicios" class="mobile-nav-link text-white/80 hover:text-volt py-1">Servicios</a>
-        <a href="#brief-simulator" class="mobile-nav-link text-white/80 hover:text-volt py-1">Cotizador & Brief</a>
+        <a href="#brief-simulator" class="mobile-nav-link text-white/80 hover:text-volt py-1">Preparar brief</a>
         <a href="#contacto" class="mobile-nav-link text-white/80 hover:text-volt py-1">Contacto</a>
-        <a href="#brief-simulator" class="btn-primary text-center mt-2 px-5 py-3 rounded-full bg-volt text-black font-semibold text-xs tracking-wider uppercase">
-          Iniciar Proyecto
-        </a>
+        <a href="#manifiesto" class="mobile-nav-link text-white/80 hover:text-volt py-1">Sobre ASTRA</a>
+        <a href="#brand-system" class="mobile-nav-link text-white/80 hover:text-volt py-1">Laboratorio de marca</a>
+
       </div>
     </div>
   </header>
 
-  <main class="relative z-10 pt-24">
+  <main id="contenido" class="relative z-10 pt-24" tabindex="-1">
 
-    <!-- HERO SECTION -->
     <section id="hero" class="hero-section min-h-[90vh] flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-12 sm:py-16 overflow-hidden">
       <div class="max-w-5xl mx-auto text-center relative z-10">
-        
+
         <!-- Status / Category Pill -->
         <div class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full border border-volt/30 bg-volt/5 text-volt text-[11px] sm:text-xs font-mono tracking-widest uppercase mb-6 sm:mb-8 backdrop-blur-md">
           <span class="w-2 h-2 rounded-full bg-volt animate-ping"></span>
@@ -141,11 +108,11 @@
 
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-16">
-          <a href="#brand-system" class="btn-primary w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-volt text-black font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-white hover:shadow-[0_0_30px_rgba(207,255,2,0.7)] transition-all duration-300 transform hover:-translate-y-0.5">
-            Explorar Brand System
+          <a href="#brief-simulator" class="btn-primary w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-volt text-black font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-white hover:shadow-[0_0_30px_rgba(207,255,2,0.7)] transition-all duration-300 transform hover:-translate-y-0.5">
+            Preparar mi proyecto
           </a>
-          <a href="#brief-simulator" class="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 rounded-full border border-white/20 bg-white/5 hover:border-volt/50 hover:bg-volt/10 text-white font-medium text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 backdrop-blur-md">
-            Diseñar Mi Marca
+          <a href="#servicios" class="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 rounded-full border border-white/20 bg-white/5 hover:border-volt/50 hover:bg-volt/10 text-white font-medium text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 backdrop-blur-md">
+            Ver servicios
           </a>
         </div>
 
@@ -172,23 +139,343 @@
       </div>
     </section>
 
-    <!-- MANIFIESTO & NAMING SECTION -->
+    <section id="servicios" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
+            <span>// CAPACIDADES CREATIVAS</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase text-white tracking-tight">
+            Nuestros Servicios
+          </h2>
+          <p class="text-slate-400 mt-3 sm:mt-4 text-sm sm:text-base font-light">
+            Especialistas en construir marcas memorables mediante diseño de vanguardia y pensamiento estratégico.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Servicio 1 -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-volt/60 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(207,255,2,0.1)]">
+            <div>
+              <span class="text-xs font-mono text-volt block mb-4">CAPACIDAD 01</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-volt transition-colors mb-4">
+                Brand Strategy & Naming
+              </h3>
+              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Investigación conceptual, arqueología de marca, arquitectura de narrativa y naming fonético memorable para posicionar tu proyecto en una categoría propia.
+              </p>
+            </div>
+            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
+              <li>+ ADN & Filosofía</li>
+              <li>+ Naming con Raíz Estratégica</li>
+              <li>+ Posicionamiento Disruptivo</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 2 -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-volt/60 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(207,255,2,0.1)]">
+            <div>
+              <span class="text-xs font-mono text-volt block mb-4">CAPACIDAD 02</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-volt transition-colors mb-4">
+                Visual Identity Systems
+              </h3>
+              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Creación integral de sistemas de diseño visual: logotipos con cotas geométricas, área de reserva, tipografías a medida, paletas cromáticas y manuales completos.
+              </p>
+            </div>
+            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
+              <li>+ Logotipo & Isotipo</li>
+              <li>+ Manual de Marca Riguroso</li>
+              <li>+ Sistemas de Retícula & Color</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 3 -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-impact-blue/80 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(16,70,192,0.15)]">
+            <div>
+              <span class="text-xs font-mono text-impact-blue block mb-4">CAPACIDAD 03</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-blue-400 transition-colors mb-4">
+                Futuristic Web & UI/UX
+              </h3>
+              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Desarrollo web interactivo, glassmorphism, microanimaciones de partículas, dark-mode sofisticado y rendimiento impecable para trascender en la era digital.
+              </p>
+            </div>
+            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
+              <li>+ Sitios Web Interactivos</li>
+              <li>+ Experiencias Inmersivas</li>
+              <li>+ Microinteracciones & Canvas</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 4 -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-volt/60 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(207,255,2,0.1)]">
+            <div>
+              <span class="text-xs font-mono text-volt block mb-4">CAPACIDAD 04</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-volt transition-colors mb-4">
+                Creative Direction
+              </h3>
+              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Dirección de arte y storytelling para campañas de alto impacto. Diseñamos universos estéticos coherentes para lanzamientos de productos de vanguardia.
+              </p>
+            </div>
+            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
+              <li>+ Dirección de Arte</li>
+              <li>+ Manifiestos de Campaña</li>
+              <li>+ Contenido Editorial & Digital</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 5 -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-makoy-fruit/80 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(239,142,1,0.15)]">
+            <div>
+              <span class="text-xs font-mono text-makoy-fruit block mb-4">CAPACIDAD 05</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-amber-400 transition-colors mb-4">
+                Brand Evolution & Motion
+              </h3>
+              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Animación de marca, kinetic typography, activos 3D y sistemas dinámicos para que tu identidad viva y respire en pantallas, redes y entornos inmersivos.
+              </p>
+            </div>
+            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
+              <li>+ Motion Graphics & Isotipo Vivo</li>
+              <li>+ Audio Branding & Micro-SFX</li>
+              <li>+ Rediseño Evolutivo</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 6 (Custom) -->
+          <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-volt/10 to-transparent border border-volt/30 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-mono text-volt block mb-4">PROYECTO A MEDIDA</span>
+              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white mb-4">
+                ¿Tienes un reto extraordinario?
+              </h3>
+              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
+                Nos apasionan los proyectos que desafían las convenciones y requieren una forma de pensar radicalmente diferente.
+              </p>
+            </div>
+            <div class="mt-8 pt-4">
+              <a href="#brief-simulator" class="inline-flex items-center gap-2 text-volt font-bold font-mono text-xs tracking-wider uppercase hover:text-white transition-colors cursor-pointer">
+                <span>Configurar Brief Ahora</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="brief-simulator" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative bg-dark-surface/60 border-t border-white/5">
+      <div class="max-w-4xl mx-auto">
+
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
+            <span>// CONFIGURADOR DE PROYECTO</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase text-white tracking-tight">
+            Diseña tu Órbita
+          </h2>
+          <p class="text-slate-400 text-xs sm:text-sm font-light mt-2">
+            Selecciona los módulos de tu proyecto para preparar un brief preliminar.
+          </p>
+        </div>
+
+        <!-- Interactive Brief Card -->
+        <div class="rounded-3xl border border-white/10 bg-black/60 backdrop-blur-xl p-5 sm:p-8 lg:p-10 shadow-2xl">
+
+          <!-- Step 1: Type of Project -->
+          <div class="mb-8">
+            <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-3">Paso 1 // Objetivo Principal</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="brief-scope-group">
+              <button type="button" class="brief-option active p-4 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-value="brand-system" aria-pressed="true">
+                <span class="block text-sm font-bold text-white mb-1">Brand Identity 360</span>
+                <span class="block text-xs text-slate-400 font-light">Estrategia, Logotipo & Manual</span>
+              </button>
+              <button type="button" class="brief-option p-4 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-value="digital-web" aria-pressed="false">
+                <span class="block text-sm font-bold text-white mb-1">Web Futurista</span>
+                <span class="block text-xs text-slate-400 font-light">Experiencia Digital Interactiva</span>
+              </button>
+              <button type="button" class="brief-option p-4 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-value="full-universe" aria-pressed="false">
+                <span class="block text-sm font-bold text-white mb-1">Universo Completo</span>
+                <span class="block text-xs text-slate-400 font-light">Branding + Web + Campaña</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Scale of Enterprise -->
+          <div class="mb-8">
+            <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-3">Paso 2 // Etapa de la Marca</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="brief-stage-group">
+              <button type="button" class="brief-stage active p-3 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" aria-pressed="true">
+                <span class="block text-xs font-bold text-white">Startup / Lanzamiento</span>
+                <span class="block text-[11px] text-slate-400 font-mono">Desde cero al mercado</span>
+              </button>
+              <button type="button" class="brief-stage p-3 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" aria-pressed="false">
+                <span class="block text-xs font-bold text-white">Scale-Up / Crecimiento</span>
+                <span class="block text-[11px] text-slate-400 font-mono">Rediseño & Expansión</span>
+              </button>
+              <button type="button" class="brief-stage p-3 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" aria-pressed="false">
+                <span class="block text-xs font-bold text-white">Corporación / Consolidada</span>
+                <span class="block text-[11px] text-slate-400 font-mono">Evolución Estratégica</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Add-on Modules (Multi-select) -->
+          <div class="mb-10">
+            <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-3">Paso 3 // Módulos Adicionales (Opcionales)</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="brief-addons-group">
+              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
+                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-label="Naming Fonético & Arqueología">
+                <div class="text-xs">
+                  <span class="text-white font-medium block">Naming Fonético & Arqueología</span>
+                  <span class="text-slate-400 text-[11px]">Búsqueda de nombre con raíz latina/estratégica</span>
+                </div>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
+                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-label="Motion Graphics & Isotipo 3D">
+                <div class="text-xs">
+                  <span class="text-white font-medium block">Motion Graphics & Isotipo 3D</span>
+                  <span class="text-slate-400 text-[11px]">Animación orbital para medios digitales</span>
+                </div>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
+                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-label="Audio Branding & Sonoridad">
+                <div class="text-xs">
+                  <span class="text-white font-medium block">Audio Branding & Micro-Sonidos</span>
+                  <span class="text-slate-400 text-[11px]">Identidad sonora sci-fi para aplicaciones</span>
+                </div>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
+                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-label="Aplicaciones Físicas & Packaging">
+                <div class="text-xs">
+                  <span class="text-white font-medium block">Aplicaciones Físicas & Merch</span>
+                  <span class="text-slate-400 text-[11px]">Papelería, uniformes y mockups de empaque</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dynamic Result Bar -->
+          <div class="p-5 sm:p-6 rounded-2xl bg-white/[0.04] border border-volt/30 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6">
+            <div class="text-center sm:text-left">
+              <span class="text-[11px] sm:text-xs font-mono text-slate-400 block mb-1">TU PROYECTO EMPIEZA AQUÍ</span>
+              <p class="text-sm text-white">Conversemos sobre el alcance de tu proyecto.</p>
+            </div>
+            <button id="send-brief-btn" type="button" class="w-full sm:w-auto px-6 py-3 rounded-full bg-volt text-black font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-[0_0_20px_rgba(207,255,2,0.4)] cursor-pointer">
+              Cargar Brief en Formulario ↓
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contacto" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
+      <div class="max-w-5xl mx-auto">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+
+          <!-- Info Column -->
+          <div class="lg:col-span-5">
+            <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
+              <span>// CONECTAR</span>
+            </div>
+            <h2 class="text-2xl sm:text-4xl lg:text-[2.6rem] xl:text-5xl font-black font-syne uppercase text-white tracking-tight leading-tight mb-6 break-words">
+              Inicia la <br class="hidden sm:inline">conversación.
+            </h2>
+            <p class="text-slate-300 font-light text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+              Cuéntanos sobre tu visión, el reto que enfrentas o el universo que deseas construir. Dos mentes creativas listas para responder.
+            </p>
+
+            <div class="space-y-3 sm:space-y-4 font-mono text-xs text-slate-300">
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-volt">📍</span>
+                <span>GLOBAL // LATAM & DIGITAL HQ</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-volt">⚡</span>
+                <span>HOLA@ASTRA-AGENCY.COM</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
+                <span class="text-volt">🛰️</span>
+                <span>TIEMPO DE RESPUESTA: &lt; 24 HORAS</span>
+              </div>
+            </div>
+
+            <!-- Central Claim Quote -->
+            <div class="mt-6 sm:mt-8 p-5 sm:p-6 rounded-2xl border border-white/10 bg-gradient-to-r from-volt/10 to-transparent">
+              <span class="text-xs font-mono text-volt block mb-1">ADN DE MARCA</span>
+              <p class="text-sm font-semibold text-white">“Hagamos algo digno de recordar.”</p>
+            </div>
+          </div>
+
+          <!-- Form Column -->
+          <div class="lg:col-span-7">
+            <form id="contact-form" class="space-y-4 rounded-3xl border border-white/10 bg-dark-surface/90 p-5 sm:p-8 backdrop-blur-xl" novalidate>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block text-xs font-mono text-slate-300 mb-1">Nombre Completo *</label>
+                  <input type="text" id="contact-name" name="name" required placeholder="Tu nombre" class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-slate-500 focus:border-volt focus:outline-none transition-colors text-sm">
+                </div>
+                <div>
+                  <label for="contact-email" class="block text-xs font-mono text-slate-300 mb-1">Email Profesional *</label>
+                  <input type="email" id="contact-email" name="email" required placeholder="nombre@empresa.com" class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-slate-500 focus:border-volt focus:outline-none transition-colors text-sm">
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-service" class="block text-xs font-mono text-slate-300 mb-1">Servicio de Interés</label>
+                <select id="contact-service" name="service" class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white focus:border-volt focus:outline-none transition-colors text-sm">
+                  <option value="brand-identity">Brand Identity & Manual de Marca</option>
+                  <option value="futuristic-web">Sitio Web Futurista & Experiencia Digital</option>
+                  <option value="brand-strategy">Estrategia de Marca & Naming</option>
+                  <option value="creative-direction">Dirección Creativa & Campañas</option>
+                  <option value="full-universe">Universo Completo 360°</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-mono text-slate-300 mb-1">Detalles del Proyecto *</label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntanos sobre tu marca, objetivos y cronograma..." class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-slate-500 focus:border-volt focus:outline-none transition-colors text-sm"></textarea>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="btn-primary w-full py-4 rounded-xl bg-volt text-black font-bold font-syne uppercase tracking-wider text-sm hover:bg-white hover:shadow-[0_0_30px_rgba(207,255,2,0.6)] transition-all duration-300 mt-2 cursor-pointer">
+                Enviar Mensaje & Conectar Con ASTRA
+              </button>
+
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
     <section id="manifiesto" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
       <div class="max-w-6xl mx-auto">
-        
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
+
           <!-- Column 1: Graphic / Constellation Visualizer -->
           <div class="lg:col-span-5 relative">
             <div class="relative rounded-3xl p-6 sm:p-8 border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent backdrop-blur-xl overflow-hidden group">
-              
+
               <!-- Orbital Ring Graphic with Star -->
               <div class="w-full aspect-square max-w-[340px] mx-auto relative flex items-center justify-center">
                 <!-- Large Rotating Orbit -->
                 <div class="absolute inset-4 rounded-full border border-dashed border-volt/40 animate-spin-slow"></div>
                 <!-- Secondary Inverse Orbit -->
                 <div class="absolute inset-16 rounded-full border border-impact-blue/50 animate-reverse-spin"></div>
-                
+
                 <!-- Glowing Central Isotype Star -->
                 <div class="relative z-10 p-5 sm:p-6 rounded-2xl bg-dark-surface/90 border border-volt/40 shadow-[0_0_50px_rgba(207,255,2,0.25)] group-hover:scale-110 transition-transform duration-500">
                   <img src="assets/logos/astra-symbol.svg" alt="Isotipo ASTRA" class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
@@ -210,9 +497,9 @@
           <!-- Column 2: The Story & Philosophy -->
           <div class="lg:col-span-7">
             <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-4">
-              <span>// 01. EL ORIGEN & NAMING</span>
+              <span>// EL ORIGEN & NAMING</span>
             </div>
-            
+
             <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase tracking-tight text-white mb-6">
               De la chispa latina <br>
               <span class="text-volt">a la constelación de marcas.</span>
@@ -240,13 +527,12 @@
       </div>
     </section>
 
-    <!-- FILOSOFÍA: MISIÓN, VISIÓN Y ADN -->
     <section id="filosofia" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative bg-white/[0.01]">
       <div class="max-w-6xl mx-auto">
-        
+
         <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
-            <span>// 02. DECLARACIÓN ESTRATÉGICA</span>
+            <span>// DECLARACIÓN ESTRATÉGICA</span>
           </div>
           <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase text-white tracking-tight">
             Misión, Visión & Filosofía
@@ -257,7 +543,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          
+
           <!-- Misión Card -->
           <div class="group relative rounded-3xl p-6 sm:p-8 bg-dark-surface/80 border border-white/10 hover:border-volt/50 transition-all duration-300 flex flex-col justify-between hover:shadow-[0_10px_40px_rgba(207,255,2,0.1)]">
             <div>
@@ -317,14 +603,13 @@
       </div>
     </section>
 
-    <!-- LOS 5 VALORES DE ASTRA -->
     <section id="valores" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
       <div class="max-w-6xl mx-auto">
-        
+
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div>
             <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
-              <span>// 03. PILARES FUNDAMENTALES</span>
+              <span>// PILARES FUNDAMENTALES</span>
             </div>
             <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase text-white tracking-tight">
               Los 5 Valores del ADN
@@ -336,7 +621,7 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          
+
           <!-- Valor 1 -->
           <div class="valor-card p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-volt hover:bg-volt/5 transition-all duration-300 group">
             <span class="text-volt font-mono text-xs font-bold block mb-3">P-01</span>
@@ -387,10 +672,9 @@
       </div>
     </section>
 
-    <!-- BRAND SYSTEM LAB (EL LABORATORIO DEL MANUAL DE MARCA) -->
     <section id="brand-system" class="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 relative bg-gradient-to-b from-dark via-dark-surface to-dark border-t border-volt/20">
       <div class="max-w-7xl mx-auto">
-        
+
         <!-- Header of Brand Lab -->
         <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-volt/40 bg-volt/10 text-volt font-mono text-xs uppercase tracking-widest mb-4">
@@ -407,37 +691,37 @@
 
         <!-- Interactive Logo Inspector -->
         <div class="rounded-3xl border border-white/10 bg-dark-surface/90 backdrop-blur-2xl p-5 sm:p-8 lg:p-10 mb-16 shadow-2xl relative overflow-hidden">
-          
+
           <div class="flex flex-col lg:flex-row items-center justify-between gap-6 pb-6 sm:pb-8 border-b border-white/10">
             <div class="text-center lg:text-left">
               <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-1">LOGOTIPO OFICIAL & CONSTRUCCIÓN</span>
               <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white">Visualizador Vectorial en Tiempo Real</h3>
             </div>
-            
+
             <!-- Controls: Variants & Blueprint Toggle -->
             <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <!-- Variant selector buttons -->
-              <button type="button" class="logo-variant-btn active px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="corp">
+              <button type="button" class="logo-variant-btn active px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="corp" aria-pressed="true">
                 Corporativo
               </button>
-              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="white">
+              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="white" aria-pressed="false">
                 Blanco
               </button>
-              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="volt">
+              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="volt" aria-pressed="false">
                 Volt Neón
               </button>
-              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="blue">
+              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="blue" aria-pressed="false">
                 Impact Blue
               </button>
-              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="orange">
+              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="orange" aria-pressed="false">
                 Makoy Fruit
               </button>
-              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="symbol">
+              <button type="button" class="logo-variant-btn px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-mono border transition-all cursor-pointer" data-variant="symbol" aria-pressed="false">
                 Isotipo (A)
               </button>
 
               <!-- Blueprint grid toggle -->
-              <button id="toggle-grid-btn" type="button" class="px-3 py-1.5 rounded-full text-xs font-mono border border-volt/30 bg-volt/10 text-volt hover:bg-volt hover:text-black transition-all flex items-center gap-1.5 cursor-pointer">
+              <button id="toggle-grid-btn" aria-pressed="false" aria-controls="blueprint-layer" type="button" class="px-3 py-1.5 rounded-full text-xs font-mono border border-volt/30 bg-volt/10 text-volt hover:bg-volt hover:text-black transition-all flex items-center gap-1.5 cursor-pointer">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16M6 4v16M12 4v16M18 4v16"/></svg>
                 <span>Cotas & Grid</span>
               </button>
@@ -446,7 +730,7 @@
 
           <!-- Logo Display Stage -->
           <div id="logo-stage" class="relative w-full min-h-[220px] sm:min-h-[280px] md:min-h-[340px] flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 rounded-2xl bg-black/60 border border-white/5 my-6 sm:my-8 overflow-hidden transition-all duration-300">
-            
+
             <!-- Grid Blueprint Layer (Toggled) -->
             <div id="blueprint-layer" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 bg-blueprint">
               <!-- Dimension markers -->
@@ -505,7 +789,7 @@
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            
+
             <!-- Volt Swatch -->
             <div class="color-swatch-card rounded-2xl bg-dark-surface border border-white/10 p-5 flex flex-col justify-between group hover:border-volt/60 transition-all duration-300">
               <div>
@@ -670,7 +954,7 @@
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            
+
             <!-- Neue Jothama Block -->
             <div class="p-5 sm:p-6 rounded-2xl bg-black/40 border border-white/5">
               <div class="flex items-center justify-between mb-4">
@@ -730,7 +1014,7 @@
 
           <!-- Thumbnail Grid -->
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-            
+
             <!-- Page Item 1 -->
             <button type="button" class="manual-page-card group text-left rounded-xl overflow-hidden border border-white/10 bg-dark-surface hover:border-volt transition-all cursor-pointer" data-page="1" data-title="Portada Oficial">
               <div class="aspect-[4/3] overflow-hidden bg-black/40 relative">
@@ -847,339 +1131,12 @@
       </div>
     </section>
 
-    <!-- SERVICIOS DE LA AGENCIA -->
-    <section id="servicios" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
-      <div class="max-w-6xl mx-auto">
-        
-        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
-            <span>// 04. CAPACIDADES CREATIVAS</span>
-          </div>
-          <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase text-white tracking-tight">
-            Nuestros Servicios
-          </h2>
-          <p class="text-slate-400 mt-3 sm:mt-4 text-sm sm:text-base font-light">
-            Especialistas en construir marcas memorables mediante diseño de vanguardia y pensamiento estratégico.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
-          <!-- Servicio 1 -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-volt/60 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(207,255,2,0.1)]">
-            <div>
-              <span class="text-xs font-mono text-volt block mb-4">CAPACIDAD 01</span>
-              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-volt transition-colors mb-4">
-                Brand Strategy & Naming
-              </h3>
-              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-                Investigación conceptual, arqueología de marca, arquitectura de narrativa y naming fonético memorable para posicionar tu proyecto en una categoría propia.
-              </p>
-            </div>
-            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
-              <li>+ ADN & Filosofía</li>
-              <li>+ Naming con Raíz Estratégica</li>
-              <li>+ Posicionamiento Disruptivo</li>
-            </ul>
-          </div>
-
-          <!-- Servicio 2 -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-volt/60 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(207,255,2,0.1)]">
-            <div>
-              <span class="text-xs font-mono text-volt block mb-4">CAPACIDAD 02</span>
-              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-volt transition-colors mb-4">
-                Visual Identity Systems
-              </h3>
-              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-                Creación integral de sistemas de diseño visual: logotipos con cotas geométricas, área de reserva, tipografías a medida, paletas cromáticas y manuales completos.
-              </p>
-            </div>
-            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
-              <li>+ Logotipo & Isotipo</li>
-              <li>+ Manual de Marca Riguroso</li>
-              <li>+ Sistemas de Retícula & Color</li>
-            </ul>
-          </div>
-
-          <!-- Servicio 3 -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-impact-blue/80 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(16,70,192,0.15)]">
-            <div>
-              <span class="text-xs font-mono text-impact-blue block mb-4">CAPACIDAD 03</span>
-              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-blue-400 transition-colors mb-4">
-                Futuristic Web & UI/UX
-              </h3>
-              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-                Desarrollo web interactivo, glassmorphism, microanimaciones de partículas, dark-mode sofisticado y rendimiento impecable para trascender en la era digital.
-              </p>
-            </div>
-            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
-              <li>+ Sitios Web Interactivos</li>
-              <li>+ Experiencias Inmersivas</li>
-              <li>+ Microinteracciones & Canvas</li>
-            </ul>
-          </div>
-
-          <!-- Servicio 4 -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-volt/60 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(207,255,2,0.1)]">
-            <div>
-              <span class="text-xs font-mono text-volt block mb-4">CAPACIDAD 04</span>
-              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-volt transition-colors mb-4">
-                Creative Direction
-              </h3>
-              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-                Dirección de arte y storytelling para campañas de alto impacto. Diseñamos universos estéticos coherentes para lanzamientos de productos de vanguardia.
-              </p>
-            </div>
-            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
-              <li>+ Dirección de Arte</li>
-              <li>+ Manifiestos de Campaña</li>
-              <li>+ Contenido Editorial & Digital</li>
-            </ul>
-          </div>
-
-          <!-- Servicio 5 -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-dark-surface border border-white/10 hover:border-makoy-fruit/80 transition-all duration-300 group flex flex-col justify-between hover:shadow-[0_10px_30px_rgba(239,142,1,0.15)]">
-            <div>
-              <span class="text-xs font-mono text-makoy-fruit block mb-4">CAPACIDAD 05</span>
-              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white group-hover:text-amber-400 transition-colors mb-4">
-                Brand Evolution & Motion
-              </h3>
-              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-                Animación de marca, kinetic typography, activos 3D y sistemas dinámicos para que tu identidad viva y respire en pantallas, redes y entornos inmersivos.
-              </p>
-            </div>
-            <ul class="mt-8 space-y-2 text-xs font-mono text-slate-400 border-t border-white/5 pt-4">
-              <li>+ Motion Graphics & Isotipo Vivo</li>
-              <li>+ Audio Branding & Micro-SFX</li>
-              <li>+ Rediseño Evolutivo</li>
-            </ul>
-          </div>
-
-          <!-- Servicio 6 (Custom) -->
-          <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-volt/10 to-transparent border border-volt/30 flex flex-col justify-between">
-            <div>
-              <span class="text-xs font-mono text-volt block mb-4">PROYECTO A MEDIDA</span>
-              <h3 class="text-xl sm:text-2xl font-bold font-syne uppercase text-white mb-4">
-                ¿Tienes un reto extraordinario?
-              </h3>
-              <p class="text-slate-300 text-xs sm:text-sm font-light leading-relaxed">
-                Nos apasionan los proyectos que desafían las convenciones y requieren una forma de pensar radicalmente diferente.
-              </p>
-            </div>
-            <div class="mt-8 pt-4">
-              <a href="#brief-simulator" class="inline-flex items-center gap-2 text-volt font-bold font-mono text-xs tracking-wider uppercase hover:text-white transition-colors cursor-pointer">
-                <span>Configurar Brief Ahora</span>
-                <span>→</span>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SIMULADOR DE BRIEF & COTIZADOR INTERACTIVO -->
-    <section id="brief-simulator" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative bg-dark-surface/60 border-t border-white/5">
-      <div class="max-w-4xl mx-auto">
-        
-        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
-            <span>// 05. CONFIGURADOR DE PROYECTO</span>
-          </div>
-          <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black font-syne uppercase text-white tracking-tight">
-            Diseña tu Órbita
-          </h2>
-          <p class="text-slate-400 text-xs sm:text-sm font-light mt-2">
-            Selecciona los módulos de tu proyecto para generar una estimación de alcance y brief preliminar.
-          </p>
-        </div>
-
-        <!-- Interactive Calculator Card -->
-        <div class="rounded-3xl border border-white/10 bg-black/60 backdrop-blur-xl p-5 sm:p-8 lg:p-10 shadow-2xl">
-          
-          <!-- Step 1: Type of Project -->
-          <div class="mb-8">
-            <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-3">Paso 1 // Objetivo Principal</span>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="brief-scope-group">
-              <button type="button" class="brief-option active p-4 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-value="brand-system" data-base="1800">
-                <span class="block text-sm font-bold text-white mb-1">Brand Identity 360</span>
-                <span class="block text-xs text-slate-400 font-light">Estrategia, Logotipo & Manual</span>
-              </button>
-              <button type="button" class="brief-option p-4 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-value="digital-web" data-base="2200">
-                <span class="block text-sm font-bold text-white mb-1">Web Futurista</span>
-                <span class="block text-xs text-slate-400 font-light">Experiencia Digital Interactiva</span>
-              </button>
-              <button type="button" class="brief-option p-4 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-value="full-universe" data-base="3500">
-                <span class="block text-sm font-bold text-white mb-1">Universo Completo</span>
-                <span class="block text-xs text-slate-400 font-light">Branding + Web + Campaña</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 2: Scale of Enterprise -->
-          <div class="mb-8">
-            <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-3">Paso 2 // Etapa de la Marca</span>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="brief-stage-group">
-              <button type="button" class="brief-stage active p-3 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-multiplier="1.0">
-                <span class="block text-xs font-bold text-white">Startup / Lanzamiento</span>
-                <span class="block text-[11px] text-slate-400 font-mono">Desde cero al mercado</span>
-              </button>
-              <button type="button" class="brief-stage p-3 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-multiplier="1.3">
-                <span class="block text-xs font-bold text-white">Scale-Up / Crecimiento</span>
-                <span class="block text-[11px] text-slate-400 font-mono">Rediseño & Expansión</span>
-              </button>
-              <button type="button" class="brief-stage p-3 rounded-xl border border-white/10 bg-white/5 text-left transition-all cursor-pointer" data-multiplier="1.6">
-                <span class="block text-xs font-bold text-white">Corporación / Consolidada</span>
-                <span class="block text-[11px] text-slate-400 font-mono">Evolución Estratégica</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 3: Add-on Modules (Multi-select) -->
-          <div class="mb-10">
-            <span class="text-xs font-mono text-volt uppercase tracking-wider block mb-3">Paso 3 // Módulos Adicionales (Opcionales)</span>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="brief-addons-group">
-              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
-                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-add="450" data-label="Naming Fonético & Arqueología">
-                <div class="text-xs">
-                  <span class="text-white font-medium block">Naming Fonético & Arqueología</span>
-                  <span class="text-slate-400 text-[11px]">Búsqueda de nombre con raíz latina/estratégica</span>
-                </div>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
-                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-add="600" data-label="Motion Graphics & Isotipo 3D">
-                <div class="text-xs">
-                  <span class="text-white font-medium block">Motion Graphics & Isotipo 3D</span>
-                  <span class="text-slate-400 text-[11px]">Animación orbital para medios digitales</span>
-                </div>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
-                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-add="350" data-label="Audio Branding & Sonoridad">
-                <div class="text-xs">
-                  <span class="text-white font-medium block">Audio Branding & Micro-Sonidos</span>
-                  <span class="text-slate-400 text-[11px]">Identidad sonora sci-fi para aplicaciones</span>
-                </div>
-              </label>
-              <label class="flex items-center gap-3 p-3 rounded-xl border border-white/10 bg-white/5 hover:border-volt/40 cursor-pointer transition-all">
-                <input type="checkbox" class="addon-checkbox rounded border-white/20 text-volt focus:ring-volt" data-add="500" data-label="Aplicaciones Físicas & Packaging">
-                <div class="text-xs">
-                  <span class="text-white font-medium block">Aplicaciones Físicas & Merch</span>
-                  <span class="text-slate-400 text-[11px]">Papelería, uniformes y mockups de empaque</span>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <!-- Dynamic Result Bar -->
-          <div class="p-5 sm:p-6 rounded-2xl bg-white/[0.04] border border-volt/30 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6">
-            <div class="text-center sm:text-left">
-              <span class="text-[11px] sm:text-xs font-mono text-slate-400 block mb-1">ESTIMACIÓN REFERENCIAL // TIMELINE 3-6 SEMANAS</span>
-              <div class="flex items-baseline justify-center sm:justify-start gap-2">
-                <span class="text-2xl sm:text-3xl md:text-4xl font-extrabold font-mono text-volt" id="brief-total-estimate">$1,800 USD</span>
-                <span class="text-xs text-slate-400 font-mono">*Alcance estimado</span>
-              </div>
-            </div>
-            <button id="send-brief-btn" type="button" class="w-full sm:w-auto px-6 py-3 rounded-full bg-volt text-black font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-[0_0_20px_rgba(207,255,2,0.4)] cursor-pointer">
-              Cargar Brief en Formulario ↓
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CONTACTO & FORMULARIO -->
-    <section id="contacto" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative border-t border-white/5">
-      <div class="max-w-5xl mx-auto">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          <!-- Info Column -->
-          <div class="lg:col-span-5">
-            <div class="inline-flex items-center gap-2 text-volt font-mono text-xs tracking-widest uppercase mb-3">
-              <span>// 06. CONECTAR</span>
-            </div>
-            <h2 class="text-2xl sm:text-4xl lg:text-[2.6rem] xl:text-5xl font-black font-syne uppercase text-white tracking-tight leading-tight mb-6 break-words">
-              Inicia la <br class="hidden sm:inline">conversación.
-            </h2>
-            <p class="text-slate-300 font-light text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
-              Cuéntanos sobre tu visión, el reto que enfrentas o el universo que deseas construir. Dos mentes creativas listas para responder.
-            </p>
-
-            <div class="space-y-3 sm:space-y-4 font-mono text-xs text-slate-300">
-              <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                <span class="text-volt">📍</span>
-                <span>GLOBAL // LATAM & DIGITAL HQ</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                <span class="text-volt">⚡</span>
-                <span>HOLA@ASTRA-AGENCY.COM</span>
-              </div>
-              <div class="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5">
-                <span class="text-volt">🛰️</span>
-                <span>TIEMPO DE RESPUESTA: &lt; 24 HORAS</span>
-              </div>
-            </div>
-
-            <!-- Central Claim Quote -->
-            <div class="mt-6 sm:mt-8 p-5 sm:p-6 rounded-2xl border border-white/10 bg-gradient-to-r from-volt/10 to-transparent">
-              <span class="text-xs font-mono text-volt block mb-1">ADN DE MARCA</span>
-              <p class="text-sm font-semibold text-white">“Hagamos algo digno de recordar.”</p>
-            </div>
-          </div>
-
-          <!-- Form Column -->
-          <div class="lg:col-span-7">
-            <form id="contact-form" class="space-y-4 rounded-3xl border border-white/10 bg-dark-surface/90 p-5 sm:p-8 backdrop-blur-xl" novalidate>
-              
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label for="contact-name" class="block text-xs font-mono text-slate-300 mb-1">Nombre Completo *</label>
-                  <input type="text" id="contact-name" name="name" required placeholder="Tu nombre" class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-slate-500 focus:border-volt focus:outline-none transition-colors text-sm">
-                </div>
-                <div>
-                  <label for="contact-email" class="block text-xs font-mono text-slate-300 mb-1">Email Profesional *</label>
-                  <input type="email" id="contact-email" name="email" required placeholder="nombre@empresa.com" class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-slate-500 focus:border-volt focus:outline-none transition-colors text-sm">
-                </div>
-              </div>
-
-              <div>
-                <label for="contact-service" class="block text-xs font-mono text-slate-300 mb-1">Servicio de Interés</label>
-                <select id="contact-service" name="service" class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white focus:border-volt focus:outline-none transition-colors text-sm">
-                  <option value="brand-identity">Brand Identity & Manual de Marca</option>
-                  <option value="futuristic-web">Sitio Web Futurista & Experiencia Digital</option>
-                  <option value="brand-strategy">Estrategia de Marca & Naming</option>
-                  <option value="creative-direction">Dirección Creativa & Campañas</option>
-                  <option value="full-universe">Universo Completo 360°</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="contact-message" class="block text-xs font-mono text-slate-300 mb-1">Detalles del Proyecto *</label>
-                <textarea id="contact-message" name="message" rows="4" required placeholder="Cuéntanos sobre tu marca, objetivos y cronograma..." class="form-input w-full px-4 py-3 rounded-xl bg-black/50 border border-white/15 text-white placeholder-slate-500 focus:border-volt focus:outline-none transition-colors text-sm"></textarea>
-              </div>
-
-              <!-- Submit button -->
-              <button type="submit" class="btn-primary w-full py-4 rounded-xl bg-volt text-black font-bold font-syne uppercase tracking-wider text-sm hover:bg-white hover:shadow-[0_0_30px_rgba(207,255,2,0.6)] transition-all duration-300 mt-2 cursor-pointer">
-                Enviar Mensaje & Conectar Con ASTRA
-              </button>
-
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
   </main>
 
   <!-- FOOTER -->
   <footer class="border-t border-white/10 bg-black/90 py-10 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10 text-xs font-mono text-slate-400">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-      
+
       <!-- Brand & Claim -->
       <div class="flex items-center gap-4">
         <img src="assets/logos/astra-logo-white.svg" alt="ASTRA" class="h-6 w-auto">
@@ -1216,7 +1173,7 @@
         </button>
       </form>
     </div>
-    
+
     <div class="p-4 sm:p-6 bg-black flex items-center justify-center max-h-[75vh] overflow-auto">
       <img id="lightbox-img" src="" alt="Página de manual ampliada" class="max-h-[70vh] w-auto object-contain rounded-lg border border-white/10">
     </div>
@@ -1250,7 +1207,7 @@
   </dialog>
 
   <!-- Toast Notification Container for 1-Click Copy -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 pointer-events-none transform translate-y-16 opacity-0 transition-all duration-300 px-4 py-2.5 rounded-xl bg-volt text-black font-mono text-xs font-bold shadow-2xl flex items-center gap-2">
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 right-6 z-50 pointer-events-none transform translate-y-16 opacity-0 transition-all duration-300 px-4 py-2.5 rounded-xl bg-volt text-black font-mono text-xs font-bold shadow-2xl flex items-center gap-2">
     <span>✓</span>
     <span id="toast-message">Copiado al portapapeles</span>
   </div>

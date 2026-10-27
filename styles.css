@@ -421,10 +421,10 @@ body {
   color: transparent;
 }
 .bg-gradient-to-b {
-  background-image: linear-gradient(to bottom, #ffffff, #f1f5f9, #94a3b8);
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
 }
 .bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--volt), #ffffff, var(--volt));
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
 
 /* ==========================================================================
@@ -677,4 +677,14 @@ dialog[open] {
   .xl\:gap-8 { gap: 2rem; }
   .xl\:text-5xl { font-size: 3rem; line-height: 1.1; }
   .xl\:text-8xl { font-size: 5.5rem; line-height: 1; }
+}
+
+/* Keyboard navigation and accessible motion preferences */
+:focus-visible { outline: 3px solid var(--volt) !important; outline-offset: 5px; }
+section, main { scroll-margin-top: 7rem; }
+.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; padding: .75rem 1rem; background: var(--volt); color: #000; transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
